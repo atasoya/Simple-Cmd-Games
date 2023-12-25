@@ -29,7 +29,7 @@ func Horse_race(horse_count int, duration int) {
 
 	for i := 0; i < horse_count; i++ {
 		new_horse := Horse{
-			Speed:    rand.Intn(horse_count-1) + 1,
+			Speed:    rand.Intn(10-1) + 1,
 			Position: []string{"-"},
 		}
 		horse_array[i] = new_horse
@@ -55,6 +55,12 @@ func Horse_race(horse_count int, duration int) {
 	}
 
 	game := func() {
+		change_speed := func() {
+			for i := 0; i < horse_count; i++ {
+				current_horse := &horse_array[i]
+				current_horse.Speed = rand.Intn(10-1) + 1
+			}
+		}
 		render()
 
 		var input string
@@ -71,10 +77,11 @@ func Horse_race(horse_count int, duration int) {
 
 			for i := 0; i < duration+1; i++ {
 				if i == duration/2 {
-					for i := 0; i < horse_count; i++ {
-						current_horse := &horse_array[i]
-						current_horse.Speed = rand.Intn(horse_count-1) + 1
-					}
+					change_speed()
+				} else if i == duration/4 {
+					change_speed()
+				} else if i == 3*(duration/4) {
+					change_speed()
 				}
 				render()
 				tick()
