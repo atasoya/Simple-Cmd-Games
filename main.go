@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
-	C "github.com/atasoya/simple-cmd-games/commands"
+	Help_command "github.com/atasoya/simple-cmd-games/commands/Help"
+	Horse_command "github.com/atasoya/simple-cmd-games/commands/Horse_race"
 )
 
 func main() {
@@ -12,13 +14,15 @@ func main() {
 
 	switch args[0] {
 	case "-h":
-		C.Help()
+		Help_command.Help()
 	case "-H":
-		C.Help()
+		Help_command.Help()
 	case "-hr":
-		default_horse_count := 5
-		default_duration := 5
-		C.Horse_race(default_horse_count, default_duration)
+		duration, horse_count := Horse_command.Validate(args)
+
+		Horse_command.Horse_race(horse_count, duration)
+	default:
+		fmt.Println(args)
 	}
 
 }

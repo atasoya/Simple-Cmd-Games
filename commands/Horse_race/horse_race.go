@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"os"
 	"os/exec"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -85,4 +86,30 @@ func Horse_race(horse_count int, duration int) {
 
 	game()
 
+}
+
+func Validate(args []string) (int, int) {
+	duration := 5    // Default duration
+	horse_count := 5 // Default horse count
+
+	for i := 0; i < len(args); i++ {
+		if args[i] == "-d" {
+			int_value, err := strconv.Atoi(args[i+1])
+			if err != nil {
+				fmt.Println("Invalid duration argument")
+			} else {
+				duration = int_value
+			}
+		}
+		if args[i] == "-hc" {
+			int_value, err := strconv.Atoi(args[i+1])
+			if err != nil {
+				fmt.Println("Invalid horse count argument")
+			} else {
+				horse_count = int_value
+			}
+		}
+	}
+
+	return duration, horse_count
 }
