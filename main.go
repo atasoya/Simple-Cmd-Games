@@ -1,7 +1,19 @@
 package main
 
-import "fmt"
+import (
+	"os"
+	C"atasoy/cmd-line-casino/commands"
+)
 
 func main() {
-	fmt.Println("Hello World")
+
+	args := os.Args[1:]
+
+	switch args[0]{
+	case "-h":
+		C.Help()
+	case "-H":
+		C.Help()
+	}
+
 }
